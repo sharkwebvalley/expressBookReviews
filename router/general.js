@@ -34,7 +34,7 @@ public_users.get("/", async function (req, res) {
 // Get book details based on ISBN
 public_users.get("/isbn/:isbn", async function (req, res) {
   const isbn = req.params.isbn;
-  const book = books[isbn];
+  const book = await books[isbn];
   if (book) {
     res.send({ [isbn]: book });
   } else {
@@ -47,7 +47,7 @@ public_users.get("/author/:author", async function (req, res) {
   const author = req.params.author;
   const bookQuery = [];
   for (let i = 1; i <= 10; i++) {
-    let book = books[i];
+    let book = await books[i];
     if (book) {
       bookAuthor = book.author;
       if (bookAuthor === author) {
@@ -66,7 +66,7 @@ public_users.get("/title/:title", async function (req, res) {
   const title = req.params.title;
   const bookQuery = [];
   for (let i = 1; i <= 10; i++) {
-    let book = books[i];
+    let book = await books[i];
     if (book) {
       bookTitle = book.title;
       if (bookTitle === title) {
